@@ -147,12 +147,12 @@ function entSpawn( ply, ent, ent2 )
 		ent:UPSSetOwnerEnt( ply )
 	end
 end
-hook.Add( "PlayerSpawnedProp", "UPSPropSpawn", entSpawn, 20 )
-hook.Add( "PlayerSpawnedRagdoll", "UPSRagdollSpawn", entSpawn, 20 )
-hook.Add( "PlayerSpawnedEffect", "UPSEffectSpawn", entSpawn, 20 )
-hook.Add( "PlayerSpawnedVehicle", "UPSVehicleSpawn", entSpawn, 20 )
-hook.Add( "PlayerSpawnedSENT", "UPSSentSpawn", entSpawn, 20 )
-hook.Add( "PlayerSpawnedNPC", "UPSNPCSpawn", entSpawn, 20 )
+hook.Add( "PlayerSpawnedProp", "UPSPropSpawn", entSpawn, HOOK_MONITOR_LOW )
+hook.Add( "PlayerSpawnedRagdoll", "UPSRagdollSpawn", entSpawn, HOOK_MONITOR_LOW )
+hook.Add( "PlayerSpawnedEffect", "UPSEffectSpawn", entSpawn, HOOK_MONITOR_LOW )
+hook.Add( "PlayerSpawnedVehicle", "UPSVehicleSpawn", entSpawn, HOOK_MONITOR_LOW )
+hook.Add( "PlayerSpawnedSENT", "UPSSentSpawn", entSpawn, HOOK_MONITOR_LOW )
+hook.Add( "PlayerSpawnedNPC", "UPSNPCSpawn", entSpawn, HOOK_MONITOR_LOW )
 
 local playermeta = FindMetaTable( "Player" )
 
@@ -330,4 +330,4 @@ local function localPlayerReady( ply )
 	-- Hook time!
 	gamemode.Call( "UPSPlayerLoaded", ply )
 end
-hook.Add( "ULibLocalPlayerReady", "UPSInit", localPlayerReady, -1 )
+hook.Add( "ULibLocalPlayerReady", "UPSInit", localPlayerReady, HOOK_HIGH )

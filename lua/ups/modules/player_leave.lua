@@ -98,4 +98,4 @@ local function onLeave( ply )
 		end
 	end
 end
-hook.Add( "PlayerDisconnected", "UPSPlayerDisconnected", onLeave, -20 )
+hook.Add( "PlayerDisconnected", "UPSPlayerDisconnected", onLeave, HOOK_MONITOR_HIGH )

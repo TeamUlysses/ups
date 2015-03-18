@@ -5,13 +5,13 @@ function clientChangedFriend( cvar, oldvalue, newvalue )
 	local id = cvar:gsub( cvarprefix, "" )
 	id = tonumber( id )
 	if not id then return end -- Error, ignore
-	
+
 	local ent = Entity( id )
 	if not ent:IsValid() or not ent:IsPlayer() or ent == LocalPlayer() then return end -- Error, ignore
-	
+
 	local isFriend = tonumber( newvalue )
 	if not isFriend then return end -- Error, ignore
-	
+
 	if isFriend == 0 then
 		LocalPlayer():UPSRemoveFriend( ent )
 	else
@@ -34,13 +34,13 @@ end
 local function onEntCreated( ent )
 	if ent:IsValid() and ent:IsPlayer() and ent ~= LocalPlayer() then
 		local friends = ULib.parseKeyValues( file.Read( FRIENDFILE, "DATA" ) or "" )
-		
+
 		if friends[ ent:SteamID() ] then
 			RunConsoleCommand( cvarprefix .. ent:EntIndex(), "1" )
-		end		
+		end
 	end
 end
-hook.Add( "OnEntityCreated", "UPSWatchJoinFriends", onEntCreated, -20 )
+hook.Add( "OnEntityCreated", "UPSWatchJoinFriends", onEntCreated, HOOK_MONITOR_HIGH )
 
 -- Get any players that may already exist
 do
