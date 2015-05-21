@@ -85,8 +85,14 @@ local function onAuthed( ply, steamid )
 	ownership[ uid ] = ownership[ uid ] or {} -- Reclaim if available.
 end
 hook.Add( "PlayerAuthed", "UPSPlayerAuthed", onAuthed, HOOK_MONITOR_HIGH )
-hook.Add( "PlayerInitialSpawn", "UPSPlayerInitialSpawnOwnership", onAuthed, HOOK_MONITOR_HIGH )
--- The double hook above won't hurt anything, but it offers us a double check *just in case*, and because bots never auth
+
+local function onInitialSpawn( ply )
+	onAuthed( ply ) -- The double hook above won't hurt anything, but it offers us a double check *just in case*, and because bots never auth
+	if ply:IsBot() then
+		ULib.queueFunctionCall( onAuthed, ply ) -- NextBots change their UID after spawning
+	end
+end
+hook.Add( "PlayerInitialSpawn", "UPSPlayerInitialSpawnOwnership", onInitialSpawn, HOOK_MONITOR_HIGH )
 
 local function onLoaded( ply )
 	local uid = tonumber( ply:UniqueID() )
