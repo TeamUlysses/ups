@@ -81,6 +81,8 @@ hook.Add( "EntityRemoved", "UPSEntityRemoved", onEntRemoved, HOOK_MONITOR_HIGH )
 
 -- Run this function as soon as possible. AS SOON AS POSSIBLE!
 local function onAuthed( ply, steamid )
+	if not ply or not ply:IsValid() then return end
+
 	local uid = tonumber( ply:UniqueID() )
 	ownership[ uid ] = ownership[ uid ] or {} -- Reclaim if available.
 end
